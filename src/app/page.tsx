@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -77,19 +78,33 @@ const CocosGame: React.FC = () => {
     }
   };
 
+  const payment = () => {
+    console.log('payment');
+    xumm?.payload?.create({
+      TransactionType: 'Payment',
+      Destination: 'rPJuukGFu7Awm2c2fBY8jcAndfEZQngbpD',
+      Amount: String(1)
+    }).then((payload:any) => {
+      console.log('openSignRequest');
+      xumm.xapp?.openSignRequest(payload)
+    })
+  };
+
   return (
   <div id="Cocos-container" className={styles.fullscreen} style={windowSize}>
-    {bearer && (
-      <iframe
+    {/*
+    <iframe
       ref={webviewRef}
       src="https://cocos-cvx.pages.dev/"
       className={styles.fullscreenIframe}
       allow="autoplay; fullscreen; encrypted-media"
     />
-    )
-    }
     <button onClick={() => sendMessageToCocos('Hello from Next.js!')}>
       Send Message to Cocos
+    </button>
+    */}
+    <button className={styles.button} onClick={() => payment()}>
+      Payment
     </button>
   </div>
   );
