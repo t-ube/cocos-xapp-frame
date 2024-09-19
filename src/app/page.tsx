@@ -79,12 +79,15 @@ const CocosGame: React.FC = () => {
 
   return (
   <div id="Cocos-container" className={styles.fullscreen} style={windowSize}>
-    <iframe
+    {bearer && (
+      <iframe
       ref={webviewRef}
       src="https://cocos-cvx.pages.dev/"
       className={styles.fullscreenIframe}
       allow="autoplay; fullscreen; encrypted-media"
     />
+    )
+    }
     <button onClick={() => sendMessageToCocos('Hello from Next.js!')}>
       Send Message to Cocos
     </button>
