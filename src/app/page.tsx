@@ -55,6 +55,7 @@ const CocosGame: React.FC = () => {
           Destination: 'rPJuukGFu7Awm2c2fBY8jcAndfEZQngbpD',
           Amount: String(1)
         }).then((payload:any) => {
+          console.log('openSignRequest');
           xumm.xapp?.openSignRequest(payload)
         })
       }
