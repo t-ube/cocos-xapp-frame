@@ -49,16 +49,19 @@ const CocosGame: React.FC = () => {
 
     const handleMessage = (event: MessageEvent) => {
       if (event.data.type === 'FROM_COCOS') {
-        // ここでCocosからのメッセージを処理
         console.log('Received message from Cocos:', event.data.message);
-        xumm?.payload?.create({
-          TransactionType: 'Payment',
-          Destination: 'rPJuukGFu7Awm2c2fBY8jcAndfEZQngbpD',
-          Amount: String(1)
-        }).then((payload:any) => {
-          console.log('openSignRequest');
-          xumm.xapp?.openSignRequest(payload)
-        })
+        // ここでCocosからのメッセージを処理
+        if (event.data.message === 'INITIATE_PAYMENT') {
+          xumm?.payload?.create({
+            TransactionType: 'Payment',
+            Destination: 'rPJuukGFu7Awm2c2fBY8jcAndfEZQngbpD',
+            Amount: String(1)
+          }).then((payload:any) => {
+            console.log('openSignRequest');
+            xumm.xapp?.openSignRequest(payload);
+            sendMessageToCocos('PAYMENT_COMPLETED');
+          })
+        }
       }
     };
 
