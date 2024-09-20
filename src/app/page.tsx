@@ -58,8 +58,8 @@ const CocosGame: React.FC = () => {
             Amount: String(1)
           }).then((payload:any) => {
             console.log('openSignRequest');
-            xumm.xapp?.openSignRequest(payload);
             sendMessageToCocos('PAYMENT_COMPLETED');
+            xumm.xapp?.openSignRequest(payload);
           })
         }
       }
